@@ -4,7 +4,7 @@
 
 - Identify the use cases for a `Linked List`
 - Demonstrate common methods for a `Linked List`
-- Differentiate between a `Singly Linked List` and a `Doubly Linked List`
+- Differentiate between a `Singly Linked List` and an `array`
 
 ## Introduction
 
@@ -66,7 +66,8 @@ By adding an attribute accessor to our Node class, we are telling our program th
 ## Singly Linked List Methods
 
 Let's say we want to recreate the data structure of letters we had before (`[  "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]`) but this time we'll use a Singly Linked List instead of an array.
-We want to start by adding the first letter so we need to create an `add` method in our `LinkedList` class.
+We want to start by adding the first letter so we need to create an `push` method in our `LinkedList` class.
+
 ```rb
 Class LinkedList
 
@@ -75,9 +76,9 @@ Class LinkedList
       @tail = self.tail
    end 
 
-   def add(letter)
+   def push(letter)
       
-      # create a new node, if there are no nodes in our singly linked
+      # Create a new node, if there are no nodes in our singly linked
       # list already, we will assign this new node to be the head.
       this_node = Node.new(letter)
 
@@ -86,24 +87,23 @@ Class LinkedList
       end
 
       current = @head  
-      # we can will assign the value of head to current, and unless
+      # We can will assign the value of head to current, and unless
       # the value of current.next_node is nil, we will assign it to current.next_node
       until current.next_node.nil?
          current = current.next_node
       end
 
-      #finally, we will point the current(last node) to our newly created node, this_node
+      # Finally, we will point the current(last node) to our newly created node, this_node
       current.next_node = this_node
    end
 end
 ```rb
 
-Now that we've created a way to add a new `node` to our linked list, let's use our `Linked List` class and `Node` class to build out some of the common methods you may be used to using on arrays!
-
-
 
 ## When to use a Singly Linked List
+   Linked Lists are ideal for situations when you need quick insertion and deletion, but are more expensive than arrays when it comes to searching. The Big O for both interstion as well as deletion in a linked list is 0(1) because we don't need to update indexes or anything when we add or remove a node; we just need to readjust pointers. Where as with an array, intertion and deletion are O(n), because of reindexing.
 
 ## Conclusion
+   We use linked lists because they are way less expensive than arrays when it comes to insertion and deletion within lists. Linked Lists are a very common interview data structure so make sure you get to know them!
 
-## Resources
+
