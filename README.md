@@ -105,3 +105,7 @@ end
 
 ## Conclusion
    We use linked lists because they are way less expensive than arrays when it comes to insertion and deletion within lists. Linked Lists are a very common interview data structure so make sure you get to know them!
+
+## Resources
+
+https://www.rubyguides.com/2017/08/ruby-linked-list/
