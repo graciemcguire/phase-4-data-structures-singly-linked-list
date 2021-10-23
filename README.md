@@ -18,7 +18,7 @@ We use linked lists because they take less insertion time when we have a lot of 
 ```rb
 [  "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]
    [0]  [1]  [2]  [3]  [4]  [5]  [6]  [7]  [8]  [9]
-```rb
+```
 
 After creating our array, we realize we forgot to add one letter in our array! If we added the letter "G" to the end of the array, it would no longer be sorted, so we would need  to  _insert_ the "G" element into the array in the correct index, which would be  6. Because there  is already  an element in the 6th index, and more elements in the sequential indexes, all of those elements would have  to be  shifted down a  spot,  and given a new index. Because this is a smaller array it doesn't seem like the biggest deal to move the last 4 elements down a place, but as you can imagine, if we had an array of 100s or thousands or even millions of elements, reindexing *all* of those elements would take a really long time! This is where linked lists come in handy! 
 
@@ -43,7 +43,7 @@ Class LinkedList
    end 
 
 end
-```rb
+```
 
 The `head` node is going to be the very first node in our singly linked list, and will point to the next node. The `tail` of our singly linked list will be the last node in the list.
 
@@ -58,7 +58,7 @@ Class Node
       @next_node = next_node
    end
 end
-```rb
+```
 
 By adding an attribute accessor to our Node class, we are telling our program that we can't create a new instance of a `Node` without the data as well as a pointer to the next node. We set the default value of `next_node` to nil so that by default if a new Node is being added to the end of our linked list (the tail) then it doesn't need to point to anything other than `nil`.
 
@@ -97,7 +97,7 @@ Class LinkedList
       current.next_node = this_node
    end
 end
-```rb
+```
 
 
 ## When to use a Singly Linked List
@@ -105,5 +105,3 @@ end
 
 ## Conclusion
    We use linked lists because they are way less expensive than arrays when it comes to insertion and deletion within lists. Linked Lists are a very common interview data structure so make sure you get to know them!
-
-
