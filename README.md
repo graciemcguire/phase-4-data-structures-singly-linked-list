@@ -66,7 +66,7 @@ By adding an attribute accessor to our Node class, we are telling our program th
 ## Singly Linked List Methods
 
 Let's say we want to recreate the data structure of letters we had before (`[  "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]`) but this time we'll use a Singly Linked List instead of an array.
-We want to start by adding the first letter so we need to create an `push` method in our `LinkedList` class.
+We want to start by adding the first letter so we need to create an `append` method in our `LinkedList` class.
 
 ```rb
 Class LinkedList
@@ -76,7 +76,7 @@ Class LinkedList
       @tail = self.tail
    end 
 
-   def push(letter)
+   def append(letter)
       
       # Create a new node, if there are no nodes in our singly linked
       # list already, we will assign this new node to be the head.
