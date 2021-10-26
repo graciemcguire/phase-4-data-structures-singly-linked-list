@@ -118,6 +118,7 @@ Iterating through the list is a completely acceptable way to append on to our li
    end
 ```
 
+<!-- 
   append(value) {
     // if list is empty
     if (!this.tail) {
@@ -130,7 +131,8 @@ Iterating through the list is a completely acceptable way to append on to our li
       oldTail.next = this.tail
       this.tail.prev = oldTail
     }
-  }
+  } -->
+
 
 ## When to use a Singly Linked List
 
