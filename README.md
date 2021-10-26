@@ -32,7 +32,7 @@ In a `Linked List`, instead of every element (called a `Node`) having an index l
 
 The nodes in a linked list each have a value, and a pointer to another node, otherwise pointing to nil if it is at the end of the list.
 
-We'll start by building out a `LinkedList` class, with an `initialize` method containing variables for the `head` and `tail` of the Linked List. 
+We'll start by building out a `LinkedList` class, with an `initialize` method containing variables for the `head` and `tail` of the Linked List.
 
 ```rb
 Class LinkedList
@@ -51,7 +51,6 @@ The next step is to set up a `Node` class.
 
 ```rb
 Class Node
-   attr_accessor :data, :next_node
 
    def initialize(data, next_node = nil)
       @data = data
@@ -60,8 +59,7 @@ Class Node
 end
 ```
 
-By adding an attribute accessor to our Node class, we are telling our program that we can create a new instance of a `Node` without the data as well as a pointer to the next node. We set the default value of `next_node` to nil so that by default if a new Node is being added to the end of our linked list (the tail) then it doesn't need to point to anything other than `nil`.
-
+We set the default value of `next_node` to nil so that by default if a new Node is being added to the end of our linked list (the tail) then it doesn't need to point to anything other than `nil`.
 
 ## Singly Linked List Methods
 
@@ -100,11 +98,46 @@ Class LinkedList
 end
 ```
 
+Iterating through the list is a completely acceptable way to append on to our list. However, because we have created a `tail` we can just go ahead and use that variable instead.
+
+
+```rb
+   def append(letter)
+      #check if the list is empty
+      if @tail == nil 
+         @head = Node.new(letter)
+         @tail = Node.new(letter)
+      else
+      # if the list has >= one Node
+         old_tail = @tail
+         tail = Node.new(letter)
+         old_tail.next = @tail
+         @tail.prev = old_tail
+
+      end
+   end
+```
+
+  append(value) {
+    // if list is empty
+    if (!this.tail) {
+      this.head = this.tail = new Node(value)
+    }
+    // if linkedlist has >= one node
+    else {
+      let oldTail = this.tail
+      this.tail = new Node(value)
+      oldTail.next = this.tail
+      this.tail.prev = oldTail
+    }
+  }
 
 ## When to use a Singly Linked List
-   Linked Lists are ideal for situations when you need quick insertion and deletion, but are more expensive than arrays when it comes to searching. The Big O for both insertion as well as deletion in a linked list is 0(1) because we don't need to update indexes or anything when we add or remove a node; we just need to readjust pointers. Whereas with an array, insertion and deletion are O(n), because of reindexing.
+
+   Linked Lists are ideal for situations when you need quick insertion and deletion, but are more expensive than arrays when it comes to searching. The Big O for both insertion as well as deletion in a linked list is `0(1)` because we don't need to update indexes or anything when we add or remove a node; we just need to readjust pointers. Whereas with an array, insertion and deletion are `O(n)`, because of reindexing.
 
 ## Conclusion
+
    We use linked lists because they are way less expensive than arrays when it comes to insertion and deletion within lists. Linked Lists are a very common interview data structure so make sure you get to know them!
 
 ## Resources
