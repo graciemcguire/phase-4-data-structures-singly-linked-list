@@ -2,146 +2,183 @@
 
 ## Learning Goals
 
-- Identify the use cases for a `Linked List`
-- Demonstrate common methods for a `Linked List`
-- Differentiate between a `Singly Linked List` and an `array`
+- Identify the use cases for a Singly Linked List
+- Demonstrate common methods for a Singly Linked List
+- Differentiate between a Singly Linked List and an array
 
 ## Introduction
 
-In this lesson, we'll learn what a `Singly Linked List` is, along with how to build and implement one in a class. We'll also learn some of
-its common methods to get an understanding of what the differences between a `Singly Linked List` and an`Array` are.
+In this lesson, we'll learn what a **Singly Linked List** is, along with how to
+build a `LinkedList` class. We'll also learn some of its common methods to get
+an understanding of what the differences between a Singly Linked List and an
+array are.
+
+## What Is a Linked List?
+
+A linked list is a linear (ordered) collection of data that consists of several
+elements, called **nodes**, with each node pointing to the next node in the
+list. Unlike arrays, linked lists aren't indexed.
+
+Think of it like a train: each car is connected to the next car, which is
+connected to the next car, and so forth. In an array, we can say "Give me the
+sixth element," but in a linked list, we have to start at the beginning of the
+train, and go from the first car, to the second car, and so forth:
+
+<!-- # pupper linked list image here -->
+
+The nodes in a linked list each have a value, and a pointer to another node,
+otherwise pointing to nil if it is at the end of the list.
 
 ## Why Linked Lists?
 
-We use linked lists because they take less insertion time when we have a lot of data. >> elaborate << Think about if we have a sorted alphabet array of 10 elements representing letters.
+Linked lists and arrays are both data structures that can hold ordered lists of
+data. Depending on what kind of operations you need to perform with that list,
+there are some scenarios where a linked list can be more efficient than an
+array, such as efficiently adding and removing elements from any arbitrary
+position within the list.
+
+Think about if we have a sorted alphabet array of 10 elements representing
+letters:
 
 ```rb
 [  "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]
    [0]  [1]  [2]  [3]  [4]  [5]  [6]  [7]  [8]  [9]
 ```
 
-After creating our array, we realize we forgot to add one letter in our array! If we added the letter "G" to the end of the array, it would no longer be sorted, so we would need  to  _insert_ the "G" element into the array in the correct index, which would be  6. Because there  is already  an element in the 6th index, and more elements in the sequential indexes, all of those elements would have  to be  shifted down a  spot,  and given a new index. Because this is a smaller array it doesn't seem like the biggest deal to move the last 4 elements down a place, but as you can imagine, if we had an array of hundreds or thousands or even millions of elements, reindexing *all* of those elements would take a really long time! This is where linked lists come in handy! 
+After creating our array, we realize we forgot to add one letter in our array!
+To fix our array, we would need to _insert_ the "G" element into the array in
+the correct index, which would be 6. Because there is already an element in the
+6th index, and more elements in the sequential indexes, all of those elements
+would have to be shifted down a spot, and given a new index.
 
-# pupper array image here
+Since this is a smaller array, it doesn't seem like the biggest deal to move
+the last 4 elements down a place, but as you can imagine, if we had an array of
+hundreds or thousands or even millions of elements, reindexing _all_ of those
+elements would take a really long time! This is where linked lists come in
+handy.
+
+<!-- # pupper array image here -->
 
 ## Defining a Singly Linked List
 
-In a `Linked List`, instead of every element (called a `Node`) having an index like in an array, each `node` is just pointing to the next `node`. These `nodes` can be sorted or unsorted and can be any data type. `Nodes` aren't indexed in a singly linked list as they are in an array; instead, they only know about the next element in the list. Think of it like a train, each car is connected to the next car, which is connected to the next car, and so forth. In an array we can say “Give me the sixth element,” but in a linked list we have to start at the beginning of the train, and go from the first car, to the second car, and so forth. Let's take a look at how we can build this out. 
-
-# pupper linked list image here
-
-The nodes in a linked list each have a value, and a pointer to another node, otherwise pointing to nil if it is at the end of the list.
-
-We'll start by building out a `LinkedList` class, with an `initialize` method containing variables for the `head` and `tail` of the Linked List.
+Time to build our custom data structure! Since our `LinkedList` class is going
+to contain a series of nodes linked together, we'll start by creating `Node`
+class:
 
 ```rb
-Class LinkedList
+class Node
+  attr_accessor :data, :next_node
 
-   def initialize
-      @head = nil
-      @tail = nil
-   end 
-
+  def initialize(data, next_node = nil)
+    @data = data
+    @next_node = next_node
+  end
 end
 ```
 
-The `head` node is going to be the very first node in our singly linked list, and will point to the next node. The `tail` of our singly linked list will be the last node in the list.
+Each node needs to keep track of some data, as well as a reference to the next
+node in the list.
 
-The next step is to set up a `Node` class. 
+Next, we can build out a `LinkedList` class, with an `initialize` method where
+we declare an instance variable for the `head` of the linked list:
 
 ```rb
-Class Node
+class LinkedList
+  attr_accessor :head
 
-   def initialize(data, next_node = nil)
-      @data = data
-      @next_node = next_node
-   end
+  def initialize
+    @head = nil
+  end
 end
 ```
 
-We set the default value of `next_node` to nil so that by default if a new Node is being added to the end of our linked list (the tail) then it doesn't need to point to anything other than `nil`.
+The `head` node is going to be the very first node in our linked list, and will
+point to the next node once we start adding more elements.
 
-## Singly Linked List Methods
+### Adding Nodes
 
-Let's say we want to recreate the data structure of letters we had before (`[  "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]`) but this time we'll use a Singly Linked List instead of an array.
-We want to start by adding the first letter so we need to create an `append` method in our `LinkedList` class.
+Let's say we want to recreate the data structure of letters we had before
+(`[ "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]`). This time we'll use a
+linked list instead of an array. The simplest way to do this is to create a
+series of nodes and link them together using the `next_node` attribute:
 
 ```rb
-Class LinkedList
+a = Node.new("A")
+# A
+b = Node.new("B")
+a.next_node = b
+# A -> B
+c = Node.new("C")
+b.next_node = c
+# A -> B -> C
+```
 
-   def initialize
-      @head = nil
-      @tail = nil
-   end 
+While this technically qualifies as a linked list, it's not the most pleasant to
+work with! We can make our data structure a bit more developer-friendly by using
+the `LinkedList` class to build a list by creating an `append` method in our
+`LinkedList` class.
 
-   def append(letter)
-      
-      # Create a new node, if there are no nodes in our singly linked
-      # list already, we will assign this new node to be the head.
-      this_node = Node.new(letter)
+The `append` method should add a node to the `head` of the list if the list is
+empty, and add it to the end of the list if not:
 
-      if @head.nil?
-         @head = this_node
-         return
-      end
+```rb
+class LinkedList
+  attr_accessor :head
 
-      current = @head  
-      # We can will assign the value of head to current, and unless
-      # the value of current.next_node is nil, we will assign it to current.next_node
-      until current.next_node.nil?
-         current = current.next_node
-      end
+  def initialize
+    @head = nil
+  end
 
-      # Finally, we will point the current(last node) to our newly created node, this_node
-      current.next_node = this_node
-   end
+  def append(node)
+    # Add element to the beginning of the list if the list is empty
+    if head.nil?
+      self.head = node
+      return
+    end
+
+    # Otherwise, traverse the list to find the last node
+    last_node = head
+    while last_node.next_node
+      last_node = last_node.next_node
+    end
+
+    # and add the node to the end
+    last_node.next_node = node
+  end
 end
 ```
 
-Iterating through the list is a completely acceptable way to append on to our list. However, because we have created a `tail` we can just go ahead and use that variable instead.
-
+Now we can build our linked list like so:
 
 ```rb
-   def append(letter)
-      #check if the list is empty
-      if @tail == nil 
-         @head = Node.new(letter)
-         @tail = Node.new(letter)
-      else
-      # if the list has >= one Node
-         old_tail = @tail
-         tail = Node.new(letter)
-         old_tail.next = @tail
-         @tail.prev = old_tail
-
-      end
-   end
+list = LinkedList.new
+list.append(Node.new("A"))
+# A
+list.append(Node.new("B"))
+# A -> B
+list.append(Node.new("C"))
+# A -> B -> C
 ```
-
-<!-- 
-  append(value) {
-    // if list is empty
-    if (!this.tail) {
-      this.head = this.tail = new Node(value)
-    }
-    // if linkedlist has >= one node
-    else {
-      let oldTail = this.tail
-      this.tail = new Node(value)
-      oldTail.next = this.tail
-      this.tail.prev = oldTail
-    }
-  } -->
-
 
 ## When to use a Singly Linked List
 
-   Linked Lists are ideal for situations when you need quick insertion and deletion, but are more expensive than arrays when it comes to searching. The Big O for both insertion as well as deletion in a linked list is `0(1)` because we don't need to update indexes or anything when we add or remove a node; we just need to readjust pointers. Whereas with an array, insertion and deletion are `O(n)`, because of reindexing.
+Linked Lists are ideal for situations when you need quick insertion and
+deletion, but are more expensive than arrays when it comes to searching, since
+arrays are indexed. The Big O for both insertion as well as deletion at a known
+node in a linked list is `0(1)` because we don't need to update indexes for the
+other elements in the list when a new element is added: we just need to adjust
+which node the `next_node` points to. With an array, insertion and deletion from
+anywhere other than the end are `O(n)`, because other elements need to be
+reindexed.
 
 ## Conclusion
 
-   We use linked lists because they are way less expensive than arrays when it comes to insertion and deletion within lists. Linked Lists are a very common interview data structure so make sure you get to know them!
+We use linked lists because they can be less expensive than arrays when it comes
+to insertion and deletion within lists. Linked Lists are a very common interview
+data structure, so make sure you get to know them! In the next lesson, we'll
+build more methods in our `LinkedList` class.
 
 ## Resources
 
-https://www.rubyguides.com/2017/08/ruby-linked-list/
+- [Linked list](https://en.wikipedia.org/wiki/Linked_list)
+- [Practical Linked List in Ruby](https://www.rubyguides.com/2017/08/ruby-linked-list/)
