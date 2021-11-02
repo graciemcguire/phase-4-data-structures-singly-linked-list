@@ -24,8 +24,6 @@ connected to the next car, and so forth. In an array, we can say "Give me the
 sixth element," but in a linked list, we have to start at the beginning of the
 train, and go from the first car, to the second car, and so forth:
 
-<!-- # pupper linked list image here -->
-
 The nodes in a linked list each have a value, and a pointer to another node,
 otherwise pointing to nil if it is at the end of the list.
 
@@ -37,27 +35,28 @@ there are some scenarios where a linked list can be more efficient than an
 array, such as efficiently adding and removing elements from any arbitrary
 position within the list.
 
-Think about if we have a sorted alphabet array of 10 elements representing
-letters:
+Think about if we have a sorted dog array of 5 elements representing
+dog breeds:
 
 ```rb
-[  "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]
-   [0]  [1]  [2]  [3]  [4]  [5]  [6]  [7]  [8]  [9]
+["Bulldog", "Chihuahua", "German Shepard", "Retriever", "Shiba Inu"]
+   [0]          [1]            [2]             [3]          [4] 
 ```
 
-After creating our array, we realize we forgot to add one letter in our array!
-To fix our array, we would need to _insert_ the "G" element into the array in
-the correct index, which would be 6. Because there is already an element in the
-6th index, and more elements in the sequential indexes, all of those elements
-would have to be shifted down a spot, and given a new index.
+After creating our array, we realize we forgot to add one dog in our array, a
+Chow Chow! To fix our array, we would need to _insert_ the "Chow Chow" element
+into the array in the correct index, which would be 2. Because there is already
+an element in the 2th index, and more elements in the sequential indexes, all of
+those elements would have to be shifted down a spot, and given a new index.
+
+[Pup Array](https://curriculum-content.s3.amazonaws.com/pup_array.png)
 
 Since this is a smaller array, it doesn't seem like the biggest deal to move
-the last 4 elements down a place, but as you can imagine, if we had an array of
+the last 3 elements down a place, but as you can imagine, if we had an array of
 hundreds or thousands or even millions of elements, reindexing _all_ of those
 elements would take a really long time! This is where linked lists come in
 handy.
 
-<!-- # pupper array image here -->
 
 ## Defining a Singly Linked List
 
@@ -97,20 +96,21 @@ point to the next node once we start adding more elements.
 
 ### Adding Nodes
 
-Let's say we want to recreate the data structure of letters we had before
-(`[ "A", "B", "C", "D", "E", "F", "H", "I", "J", "K" ]`). This time we'll use a
-linked list instead of an array. The simplest way to do this is to create a
-series of nodes and link them together using the `next_node` attribute:
+Let's say we want to recreate the data structure of dogs we had before
+(`["Bulldog", "Chihuahua", "German Shepard", "Retriever", "Shiba Inu"]`). This
+time we'll use a linked list instead of an array. The simplest way to do this is
+to create a series of nodes and link them together using the `next_node`
+attribute:
 
 ```rb
-a = Node.new("A")
-# A
-b = Node.new("B")
-a.next_node = b
-# A -> B
-c = Node.new("C")
-b.next_node = c
-# A -> B -> C
+bulldog = Node.new("Bulldog")
+# Bulldog
+chihuahua = Node.new("Chihuahua")
+bulldog.next_node = chihuahua
+# Bulldog -> Chihuahua
+german_shepard = Node.new("German Shepard")
+chihuahua.next_node = german_shepard
+# Bulldog -> Chihuahua -> German Shepard
 ```
 
 While this technically qualifies as a linked list, it's not the most pleasant to
@@ -152,12 +152,12 @@ Now we can build our linked list like so:
 
 ```rb
 list = LinkedList.new
-list.append(Node.new("A"))
-# A
-list.append(Node.new("B"))
-# A -> B
-list.append(Node.new("C"))
-# A -> B -> C
+list.append(Node.new("Bulldog"))
+# Bulldog
+list.append(Node.new("Chihuahua"))
+# Bulldog -> Chihuahua
+list.append(Node.new("German Shepard"))
+# Bulldog -> Chihuahua -> German Shepard
 ```
 
 ## When to use a Singly Linked List
@@ -170,6 +170,8 @@ other elements in the list when a new element is added: we just need to adjust
 which node the `next_node` points to. With an array, insertion and deletion from
 anywhere other than the end are `O(n)`, because other elements need to be
 reindexed.
+
+[Pup Linked List](https://curriculum-content.s3.amazonaws.com/pup_linked_list.png)
 
 ## Conclusion
 
