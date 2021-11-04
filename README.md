@@ -49,7 +49,7 @@ into the array in the correct index, which would be 2. Because there is already
 an element in the 2th index, and more elements in the sequential indexes, all of
 those elements would have to be shifted down a spot, and given a new index.
 
-![Pup Array](https://curriculum-content.s3.amazonaws.com/pup_array.png)
+![Pup Array](https://curriculum-content.s3.amazonaws.com/phase-4/phase-4-data-structures-singly-linked-list/pup_array.png)
 
 Since this is a smaller array, it doesn't seem like the biggest deal to move
 the last 3 elements down a place, but as you can imagine, if we had an array of
@@ -171,7 +171,7 @@ which node the `next_node` points to. With an array, insertion and deletion from
 anywhere other than the end are `O(n)`, because other elements need to be
 reindexed.
 
-![Pup Linked List](https://curriculum-content.s3.amazonaws.com/pup_linked_list.png)
+![Pup Linked List](https://curriculum-content.s3.amazonaws.com/phase-4/phase-4-data-structures-singly-linked-list/pup_linked_list.png)
 
 ## Conclusion
 
